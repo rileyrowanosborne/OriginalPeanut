@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://vxcvhwjxl1l"]
+
+[ext_resource type="Texture2D" uid="uid://d4mb52n7qtoji" path="res://Assets/Spikes-Sprite.png" id="1_nrdsm"]
+[ext_resource type="PackedScene" uid="uid://dpichy445furl" path="res://Scenes/killzone.tscn" id="2_gwqs2"]
+
+[node name="Spikes" type="Node2D"]
+
+[node name="Spikes-sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_nrdsm")
+
+[node name="Killzone" parent="." instance=ExtResource("2_gwqs2")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Killzone"]
+polygon = PackedVector2Array(0, 0, -5, -4, -7, 8, 7, 8, 4, -4)
+
+[connection signal="area_entered" from="Killzone" to="Killzone" method="_on_area_entered"]

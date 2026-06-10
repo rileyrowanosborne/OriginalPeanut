@@ -1,0 +1,147 @@
+[gd_scene load_steps=21 format=3 uid="uid://djrb02bbiv1nf"]
+
+[ext_resource type="Script" uid="uid://bk04pgvsrvdsj" path="res://Scripts/the_eye.gd" id="1_iuvgy"]
+[ext_resource type="PackedScene" uid="uid://dpichy445furl" path="res://Scenes/killzone.tscn" id="2_iuvgy"]
+[ext_resource type="Texture2D" uid="uid://dootmwwp3oo7e" path="res://Assets/Eye-Floating-Right-Sheet.png" id="2_mpnve"]
+[ext_resource type="PackedScene" uid="uid://cfn6dwah8wphp" path="res://Scenes/projectile.tscn" id="2_w20ox"]
+[ext_resource type="Texture2D" uid="uid://c4hfhbnferax3" path="res://Assets/Radial_LightTexture.png" id="3_sfwni"]
+[ext_resource type="Script" uid="uid://csaxfhxgctphx" path="res://Scenes/hit_box.gd" id="5_w20ox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w20ox"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfwni"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dnmda"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icvvj"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p7c8"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqk6q"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ho3r"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjfrp"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgqgh"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao4fc"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2060"]
+atlas = ExtResource("2_mpnve")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w20ox"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w20ox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfwni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dnmda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icvvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p7c8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqk6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ho3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjfrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgqgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao4fc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2060")
+}],
+"loop": true,
+"name": &"TheEye",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evxtd"]
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfwni"]
+radius = 15.0
+
+[node name="TheEye" type="Node2D"]
+script = ExtResource("1_iuvgy")
+projectile_scene = ExtResource("2_w20ox")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(3, -20)
+color = Color(0.196143, 0.196143, 0.196143, 1)
+shadow_enabled = true
+texture = ExtResource("3_sfwni")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -22)
+sprite_frames = SubResource("SpriteFrames_w20ox")
+animation = &"TheEye"
+autoplay = "TheEye"
+frame = 2
+frame_progress = 0.329336
+
+[node name="RayCastRight" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(18, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2(0, -7)
+target_position = Vector2(-18, 0)
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -14)
+
+[node name="Killzone" parent="." instance=ExtResource("2_iuvgy")]
+position = Vector2(0, -22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_evxtd")
+
+[node name="HitBox" type="Area2D" parent="."]
+script = ExtResource("5_w20ox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -18)
+shape = SubResource("CircleShape2D_sfwni")
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered"]

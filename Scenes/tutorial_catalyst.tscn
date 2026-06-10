@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cee8b3wxq5bgi"]
+
+[ext_resource type="Script" uid="uid://bsl6w44pp476g" path="res://Scripts/tutorial_catalyst.gd" id="1_w07o5"]
+[ext_resource type="Texture2D" uid="uid://b5obmmcatwmvq" path="res://Assets/Earth_Catalyst.png" id="2_o7qyc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3opui"]
+radius = 17.0294
+
+[node name="TutorialCatalyst" type="Node2D"]
+script = ExtResource("1_w07o5")
+
+[node name="ScrollArea" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="TutorialCatalystSprite" type="Sprite2D" parent="ScrollArea"]
+texture = ExtResource("2_o7qyc")
+
+[node name="TutorialCatalystCollision" type="CollisionShape2D" parent="ScrollArea"]
+shape = SubResource("CircleShape2D_3opui")
+
+[connection signal="area_entered" from="ScrollArea" to="." method="_on_scroll_area_area_entered"]
+[connection signal="area_exited" from="ScrollArea" to="." method="_on_scroll_area_area_exited"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck1t38ajb53k"]
+
+[ext_resource type="Script" uid="uid://dg84mk1u4kbcv" path="res://Scripts/main_menu.gd" id="1_48xlc"]
+[ext_resource type="Script" uid="uid://dyabaexptm02i" path="res://Scripts/SaveManager.gd" id="1_ce3w2"]
+[ext_resource type="Texture2D" uid="uid://c5qompwr6w1il" path="res://Assets/AnatomyTitleScreen-2.png" id="2_n45e2"]
+[ext_resource type="FontFile" uid="uid://dwqf3kgxvfrkn" path="res://Assets/chary___.ttf" id="4_ce3w2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n45e2"]
+font = ExtResource("4_ce3w2")
+font_size = 75
+
+[node name="mainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -1080.0
+offset_right = -960.0
+offset_bottom = -1080.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_ce3w2")
+
+[node name="HUDNode" type="Node" parent="."]
+script = ExtResource("1_48xlc")
+
+[node name="waitToStartTimer" type="Timer" parent="HUDNode"]
+one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="HUDNode"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_n45e2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Press anykey to start" type="Label" parent="HUDNode"]
+offset_left = 1031.0
+offset_top = 889.0
+offset_right = 1690.0
+offset_bottom = 989.0
+text = "<Press space key>"
+label_settings = SubResource("LabelSettings_n45e2")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="timeout" from="HUDNode/waitToStartTimer" to="HUDNode" method="_on_wait_to_start_timer_timeout"]

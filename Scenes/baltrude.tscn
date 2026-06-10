@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://b02n7bjggwbsb"]
+
+[ext_resource type="Script" uid="uid://bv53dkps0a4np" path="res://Scripts/baltrude.gd" id="1_dsox5"]
+[ext_resource type="Texture2D" uid="uid://6g2jv72n405o" path="res://Assets/BaltrudeTrueSize - idle-Sheet.png" id="2_s5cpx"]
+[ext_resource type="Texture2D" uid="uid://dyph2vhg088vv" path="res://Assets/BaltrudeTrueSize - talking-Sheet.png" id="3_ivo1k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5cpx"]
+atlas = ExtResource("2_s5cpx")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivo1k"]
+atlas = ExtResource("2_s5cpx")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_makkt"]
+atlas = ExtResource("2_s5cpx")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14ao8"]
+atlas = ExtResource("2_s5cpx")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts7y3"]
+atlas = ExtResource("3_ivo1k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfvjv"]
+atlas = ExtResource("3_ivo1k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwbjp"]
+atlas = ExtResource("3_ivo1k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl3rp"]
+atlas = ExtResource("3_ivo1k")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_makkt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5cpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivo1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_makkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14ao8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts7y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfvjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwbjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl3rp")
+}],
+"loop": true,
+"name": &"Talking",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14ao8"]
+size = Vector2(99.4444, 65.5556)
+
+[node name="Baltrude" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_dsox5")
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -32)
+sprite_frames = SubResource("SpriteFrames_makkt")
+animation = &"Idle"
+autoplay = "Idle"
+flip_h = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -30)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("RectangleShape2D_14ao8")
+
+[node name="DialogueTimerIntro" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

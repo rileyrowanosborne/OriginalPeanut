@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://dly24cugo6j6"]
+
+[ext_resource type="Script" uid="uid://b7bpr0pxer4tq" path="res://Scripts/player.gd" id="1_f1ek2"]
+
+[sub_resource type="Curve" id="Curve_fs7ks"]
+_data = [Vector2(0.0679887, 1), 0.0, 0.0, 0, 0, Vector2(0.981586, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_l6n3p"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0425829), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Player" type="CharacterBody2D"]
+process_mode = 3
+collision_layer = 2
+script = ExtResource("1_f1ek2")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="JumpParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 5
+lifetime = 0.25
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_fs7ks")
+
+[node name="DoubleJumpParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 10)
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_l6n3p")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Coyote Timer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="Jump Buffer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="WallCoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.3
+one_shot = true
+
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="RayCastRight" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -5)
+target_position = Vector2(10, 0)
+
+[node name="RayCastLeft" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, -5)
+target_position = Vector2(-10, 0)
+
+[node name="RayCastBottom" type="RayCast2D" parent="RayCasts"]
+target_position = Vector2(0, 2)
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="DialogueTimerIntro" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="DialogueTimerIntro" to="." method="_on_dialogue_timer_intro_timeout"]

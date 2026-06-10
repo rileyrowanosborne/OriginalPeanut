@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ioms1lo5hl7n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6md5"]
+radius = 106.0
+height = 242.0
+
+[node name="KNÜT" type="Area2D"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -17)
+shape = SubResource("CapsuleShape2D_p6md5")

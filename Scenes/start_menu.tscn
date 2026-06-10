@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyllmc0wq8nj2"]
+
+[ext_resource type="Script" uid="uid://5urr6pyn2mcw" path="res://Scripts/start_menu.gd" id="1_i2i62"]
+[ext_resource type="Texture2D" uid="uid://dy3k11nqvsw1j" path="res://Assets/PeanutQuest-CloudsAlone.png" id="1_jgtwh"]
+[ext_resource type="Texture2D" uid="uid://bldopoiq5ikmg" path="res://Assets/ThePeanutTitleArt.png" id="2_m6uer"]
+[ext_resource type="Texture2D" uid="uid://ccbopyb6yx03e" path="res://Assets/LoadGameTileLabel.png" id="3_8u0lp"]
+[ext_resource type="Texture2D" uid="uid://dhm0m6m4vj84f" path="res://Assets/NewGameTileLabel.png" id="4_i2i62"]
+[ext_resource type="Texture2D" uid="uid://cfu054mg4tf6f" path="res://Assets/OptionsTileLabel.png" id="5_lfskg"]
+[ext_resource type="Texture2D" uid="uid://u1chrr3eppp5" path="res://Assets/QuitTileLabel.png" id="6_ru7em"]
+
+[node name="StartMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i2i62")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1936.0
+offset_bottom = 1082.0
+texture = ExtResource("1_jgtwh")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 610.0
+offset_top = 501.0
+offset_right = 754.0
+offset_bottom = 645.0
+texture = ExtResource("2_m6uer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 731.0
+offset_top = 413.0
+offset_right = 1285.0
+offset_bottom = 777.0
+
+[node name="LoadGameButton" type="Button" parent="VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action_mode = 0
+icon = ExtResource("3_8u0lp")
+flat = true
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 4
+action_mode = 0
+icon = ExtResource("4_i2i62")
+flat = true
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+action_mode = 0
+icon = ExtResource("5_lfskg")
+flat = true
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 4
+action_mode = 0
+icon = ExtResource("6_ru7em")
+flat = true
+
+[connection signal="button_down" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_button_down"]

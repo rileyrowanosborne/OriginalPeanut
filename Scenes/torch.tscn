@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://5bjboxa3471y"]
+
+[ext_resource type="Texture2D" uid="uid://c4hfhbnferax3" path="res://Assets/Radial_LightTexture.png" id="1_h1t0l"]
+[ext_resource type="Script" uid="uid://dt4m8nhm5dtgi" path="res://Scripts/torch_light_4.gd" id="2_h1t0l"]
+
+[node name="Torch" type="PointLight2D"]
+color = Color(0.703164, 0.246121, 0.066344, 1)
+energy = 0.75
+shadow_enabled = true
+texture = ExtResource("1_h1t0l")
+script = ExtResource("2_h1t0l")
